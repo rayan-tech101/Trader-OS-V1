@@ -1,0 +1,26 @@
+# Trader OS v2
+
+Trader OS v2 is a lightweight trading journal designed for disciplined traders.
+
+## Features
+- Structured trade notes
+- Session analysis
+- Strategy planning
+- Psychology log
+- Performance dashboard
+- Optional Python analytics
+
+## Quick start
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+## Files
+- `trader_os/` contains reusable trading logic
+- `Python-Analytics/` contains chart and report generation
+- `Templates/` contains Obsidian note templates
+- `Journal/` is where trading notes are stored

@@ -1,0 +1,45 @@
+import csv
+from statistics import mean
+
+
+def load_csv(path):
+    with open(path, newline="", encoding="utf-8") as file:
+        return list(csv.DictReader(file))
+
+
+def compute_metrics(rows):
+    results = [float(row["result_r"]) for row in rows]
+    net_r = sum(results)
+    avg_r = mean(results) if results else 0.0
+    wins = sum(1 for value in results if value > 0)
+    losses = sum(1 for value in results if value < 0)
+    win_rate = (wins / len(results) * 100) if results else 0.0
+    max_drawdown = 0.0
+    running = 0.0
+    for value in results:
+        running += value
+        max_drawdown = min(max_drawdown, running)
+    return {
+        "net_r": net_r,
+        "avg_r": avg_r,
+        "wins": wins,
+        "losses": losses,
+        "win_rate": win_rate,
+        "max_drawdown": abs(max_drawdown) if max_drawdown < 0 else 0.0,
+    }
+
+
+def main():
+    rows = load_csv("Python-Analytics/sample_data.csv")
+    metrics = compute_metrics(rows)
+    print("Trader OS Analytics")
+    print(f"Net R: {metrics['net_r']:.2f}")
+    print(f"Avg R: {metrics['avg_r']:.2f}")
+    print(f"Wins: {metrics['wins']}")
+    print(f"Losses: {metrics['losses']}")
+    print(f"Win rate: {metrics['win_rate']:.2f}%")
+    print(f"Max drawdown: {metrics['max_drawdown']:.2f}R")
+
+
+if __name__ == "__main__":
+    main()

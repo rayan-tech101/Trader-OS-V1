@@ -1,0 +1,20 @@
+"""Trader OS tests."""
+
+from trader_os.analytics import calculate_summary
+
+
+def test_calculate_summary_basic():
+    trades = [
+        {"result_r": 0.5},
+        {"result_r": -0.25},
+        {"result_r": 1.0},
+        {"result_r": 0.25},
+    ]
+    summary = calculate_summary(trades)
+
+    assert summary["total"] == 4
+    assert summary["wins"] == 3
+    assert summary["losses"] == 1
+    assert summary["net_r"] == 1.5
+    assert summary["avg_r"] == 0.375
+    assert summary["win_rate"] == 75.0

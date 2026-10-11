@@ -1,0 +1,31 @@
+import json
+from pathlib import Path
+from typing import Any, Dict, List
+
+
+def load_trades(path: str | Path) -> List[Dict[str, Any]]:
+    """Load trades from a JSON file."""
+    file_path = Path(path)
+    if not file_path.exists():
+        return []
+
+    with file_path.open("r", encoding="utf-8") as handle:
+        try:
+            data = json.load(handle)
+            if isinstance(data, list):
+                return data
+        except json.JSONDecodeError:
+            return []
+    return []
+
+
+def save_trade(path: str | Path, trade: Dict[str, Any]) -> None:
+    """Append a trade to a JSON storage file."""
+    file_path = Path(path)
+    file_path.parent.mkdir(exist_ok=True, parents=True)
+
+    trades = load_trades(file_path)
+    trades.append(trade)
+
+    with file_path.open("w", encoding="utf-8") as handle:
+        json.dump(trades, handle, indent=2)

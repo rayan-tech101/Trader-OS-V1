@@ -1,0 +1,9 @@
+{
+  "main": {
+    "file": "Dashboard/Dashboard.md",
+    "group": "tabs"
+  },
+  "left-ribbon": {
+    "collapsed": false
+  }
+}

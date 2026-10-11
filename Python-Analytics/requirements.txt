@@ -1,0 +1,18 @@
+# Python Analytics
+
+This folder contains optional performance charts and summary reports for Trader OS v2.
+
+## Run
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python analytics.py
+```
+
+## What it does
+- reads CSV trade data
+- computes win rate, net R, average R, and drawdown
+- plots equity growth and distribution
+- exports a quick summary report
